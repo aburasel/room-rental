@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Providers\RouteServiceProvider;
+use App\Enums\Role;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,13 +15,17 @@ class RedirectIfAuthenticated
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next, string ...$guards): Response
+    public function handle(Request $request, Closure $next, string...$guards): Response
     {
         $guards = empty($guards) ? [null] : $guards;
 
         foreach ($guards as $guard) {
-            if (Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::HOME);
+            if (Auth::guard($guard)->check() && (auth()->user()->role == Role::ADMIN)) {
+                return redirect(route("admin.dashboard"));
+            } else if (Auth::guard($guard)->check() && (auth()->user()->role == Role::RENTAL_OWNER)) {
+                return redirect(route("rental_owner.dashboard"));
+            } else if (Auth::guard($guard)->check() && (auth()->user()->role == Role::GENERAL_USER)) {
+                return redirect(route("home"));
             }
         }
 
