@@ -35,7 +35,7 @@ class LoginController extends Controller
             return redirect()->route(route("rental-owner.dashboard"));
         }
 
-        return redirect()->route(route("home"));
+        return redirect()->route("home");
     }
 
     /**

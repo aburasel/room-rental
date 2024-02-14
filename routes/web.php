@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -14,17 +15,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])
+Route::get('/', [UserController::class, 'index'])
     ->name('home');
 
 //Auth::routes();
 Route::middleware(['auth','verified'])->group(function () {
     Route::middleware(['admin'])->group(function () {
-        Route::get('/admin/dashboard', [App\Http\Controllers\HomeController::class, 'index'])
+        Route::get('/admin/dashboard', [UserController::class, 'index'])
         ->name('admin.dashboard');
     });
     Route::middleware(['rental-owner'])->group(function () {
-        Route::get('/rental-owner/dashboard', [App\Http\Controllers\HomeController::class, 'index'])
+        Route::get('/rental-owner/dashboard', [UserController::class, 'index'])
         ->name('rental_owner.dashboard');
     });
     Route::middleware(['user'])->group(function () {
