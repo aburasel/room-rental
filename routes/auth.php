@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
 use App\Http\Controllers\Auth\EmailVerificationPromptController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RentalOwnerRegisterController;
 use App\Http\Controllers\Auth\UserRegisterController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
@@ -13,14 +14,16 @@ Route::middleware('guest')->group(function () {
 
     Route::post('user/register', [UserRegisterController::class, 'store'])->name('users.register_user');
 
-    Route::get('/rental-owners/register', [UserRegisterController::class, 'showRegistrationForm'])
+    Route::get('/rental-owners/register', [RentalOwnerRegisterController::class, 'showRegistrationForm'])
         ->name('users.register_rental_owner');
 
-    Route::post('user/register', [UserRegisterController::class, 'store'])->name('users.register_rental_owner');
+    Route::post('rental-owners/register', [RentalOwnerRegisterController::class, 'store'])->name('users.register_rental_owner');
+
 
     Route::get('login', [LoginController::class, 'create'])->name('login');
 
     Route::post('login', [LoginController::class, 'store'])->name('users.login');
+
 
     // Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])
     //             ->name('password.request');

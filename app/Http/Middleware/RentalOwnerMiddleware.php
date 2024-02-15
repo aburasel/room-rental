@@ -17,9 +17,9 @@ class RentalOwnerMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(Auth::check() && Auth::user()->role==Role::RENTAL_OWNER){
+        if (Auth::check() && Auth::user()->role == Role::RENTAL_OWNER->value) {
             return $next($request);
-        }else{
+        } else {
             return abort(404);
         }
     }

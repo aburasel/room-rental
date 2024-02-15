@@ -1,4 +1,4 @@
-<h1>General User</h1>
+<h1>Admin</h1>
 <div class="row">
     <div class="col-12">
         <div class="card">

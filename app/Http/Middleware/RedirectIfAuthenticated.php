@@ -20,11 +20,11 @@ class RedirectIfAuthenticated
         $guards = empty($guards) ? [null] : $guards;
 
         foreach ($guards as $guard) {
-            if (Auth::guard($guard)->check() && (auth()->user()->role == Role::ADMIN)) {
+            if (Auth::guard($guard)->check() && (auth()->user()->role == Role::ADMIN->value)) {
                 return redirect(route("admin.dashboard"));
-            } else if (Auth::guard($guard)->check() && (auth()->user()->role == Role::RENTAL_OWNER)) {
+            } else if (Auth::guard($guard)->check() && (auth()->user()->role == Role::RENTAL_OWNER->value)) {
                 return redirect(route("rental_owner.dashboard"));
-            } else if (Auth::guard($guard)->check() && (auth()->user()->role == Role::GENERAL_USER)) {
+            } else if (Auth::guard($guard)->check() && (auth()->user()->role == Role::GENERAL_USER->value)) {
                 return redirect(route("home"));
             }
         }

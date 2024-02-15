@@ -26,7 +26,7 @@ class RentalOwnerRegisterController extends Controller
 
     public function showRegistrationForm()
     {
-        return view('auth.register');
+        return view('auth.rental-owner.register');
     }
 
     public function store(RegistrationRequest $request): RedirectResponse

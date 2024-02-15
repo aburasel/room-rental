@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\RentalOwner\RentalOwnerController;
 use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -25,7 +26,7 @@ Route::middleware(['auth','verified'])->group(function () {
         ->name('admin.dashboard');
     });
     Route::middleware(['rental-owner'])->group(function () {
-        Route::get('/rental-owner/dashboard', [UserController::class, 'index'])
+        Route::get('/rental-owner/dashboard', [RentalOwnerController::class, 'index'])
         ->name('rental_owner.dashboard');
     });
     Route::middleware(['user'])->group(function () {
